@@ -25,21 +25,21 @@ import config
 
 
 
-ask_ques = "**» ᴩʟᴇᴀsᴇ ᴄʜᴏᴏsᴇ ᴛʜᴇ ᴩʏᴛʜᴏɴ ʟɪʙʀᴀʀʏ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ sᴛʀɪɴɢ :**"
-buttons_ques = [
+ask_ques = "**»انا بوت استخراج جلسات 🕷 استطيع استخراج جلسات على 4 مكاتب مكتوب بلغة بايثون مصنوع بواسطة:**"
+buttons_ques = [ 
     [
-        InlineKeyboardButton("ᴩʏʀᴏɢʀᴀᴍ", callback_data="pyrogram"),
-        InlineKeyboardButton("ᴛᴇʟᴇᴛʜᴏɴ", callback_data="telethon"),
+        InlineKeyboardButton("• بايروجرام •", callback_data="pyrogram"),
+        InlineKeyboardButton("تيليثون", callback_data="telethon"),
     ],
     [
-        InlineKeyboardButton("ᴩʏʀᴏɢʀᴀᴍ ʙᴏᴛ", callback_data="pyrogram_bot"),
-        InlineKeyboardButton("ᴛᴇʟᴇᴛʜᴏɴ ʙᴏᴛ", callback_data="telethon_bot"),
+        InlineKeyboardButton("• بايروجرام بوت •", callback_data="pyrogram_bot"),
+        InlineKeyboardButton("• تيليثون بوت •", callback_data="telethon_bot"),
     ],
 ]
 
 gen_button = [
     [
-        InlineKeyboardButton(text="🙄 ɢᴇɴᴇʀᴀᴛᴇ sᴇssɪᴏɴ 🙄", callback_data="generate")
+        InlineKeyboardButton(text="• بدء جلسه •", callback_data="generate")
     ]
 ]
 
@@ -77,7 +77,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             return
         api_hash = api_hash_msg.text
     if not is_bot:
-        t = "» ᴩʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ **ᴩʜᴏɴᴇ_ɴᴜᴍʙᴇʀ** ᴡɪᴛʜ ᴄᴏᴜɴᴛʀʏ ᴄᴏᴅᴇ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ɢᴇɴᴇʀᴀᴛᴇ sᴇssɪᴏɴ. \nᴇxᴀᴍᴩʟᴇ : `+910000000000`'"
+        t = "» ارسل الان  **رقم حسابك** مع رمز الدوله  \n مثال : `+910000000000`'"
     else:
         t = "ᴩʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ **ʙᴏᴛ_ᴛᴏᴋᴇɴ** ᴛᴏ ᴄᴏɴᴛɪɴᴜᴇ.\nᴇxᴀᴍᴩʟᴇ : `5432198765:abcdanonymousterabaaplol`'"
     phone_number_msg = await bot.ask(user_id, t, filters=filters.text)
@@ -85,7 +85,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
         return
     phone_number = phone_number_msg.text
     if not is_bot:
-        await msg.reply("» ᴛʀʏɪɴɢ ᴛᴏ sᴇɴᴅ ᴏᴛᴩ ᴀᴛ ᴛʜᴇ ɢɪᴠᴇɴ ɴᴜᴍʙᴇʀ...")
+        await msg.reply("» يتم ارسال رمز الى حسابك...")
     else:
         await msg.reply("» ᴛʀʏɪɴɢ ᴛᴏ ʟᴏɢɪɴ ᴠɪᴀ ʙᴏᴛ ᴛᴏᴋᴇɴ...")
     if telethon and is_bot:
@@ -105,15 +105,15 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
             else:
                 code = await client.send_code(phone_number)
     except (ApiIdInvalid, ApiIdInvalidError):
-        await msg.reply("» ʏᴏᴜʀ **ᴀᴩɪ_ɪᴅ** ᴀɴᴅ **ᴀᴩɪ_ʜᴀsʜ** ᴄᴏᴍʙɪɴᴀᴛɪᴏɴ ᴅᴏᴇsɴ'ᴛ ᴍᴀᴛᴄʜ ᴡɪᴛʜ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴩᴩs sʏsᴛᴇᴍ. \n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("» ʏᴏᴜʀ **ᴀᴩɪ_ɪᴅ** ᴀ **ᴀᴩɪ_ʜᴀsʜ**  \n\n", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     except (PhoneNumberInvalid, PhoneNumberInvalidError):
-        await msg.reply("» ᴛʜᴇ **ᴩʜᴏɴᴇ_ɴᴜᴍʙᴇʀ** ʏᴏᴜ'ᴠᴇ sᴇɴᴛ ᴅᴏᴇsɴ'ᴛ ʙᴇʟᴏɴɢ ᴛᴏ ᴀɴʏ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴄᴄᴏᴜɴᴛ.\n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", reply_markup=InlineKeyboardMarkup(gen_button))
+        await msg.reply("»  **رقم الحساب** ʏᴏᴜ'ᴠᴇ sᴇɴᴛ ᴅᴏᴇsɴ'ᴛ ʙᴇʟᴏɴɢ ᴛᴏ ᴀɴʏ ᴛᴇʟᴇɢʀᴀᴍ ᴀᴄᴄᴏᴜɴᴛ.\n\nᴩʟᴇᴀsᴇ sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", reply_markup=InlineKeyboardMarkup(gen_button))
         return
     try:
         phone_code_msg = None
         if not is_bot:
-            phone_code_msg = await bot.ask(user_id, "» ᴩʟᴇᴀsᴇ sᴇɴᴅ ᴛʜᴇ **ᴏᴛᴩ** ᴛʜᴀᴛ ʏᴏᴜ'ᴠᴇ ʀᴇᴄᴇɪᴠᴇᴅ ғʀᴏᴍ ᴛᴇʟᴇɢʀᴀᴍ ᴏɴ ʏᴏᴜʀ ᴀᴄᴄᴏᴜɴᴛ.\nɪғ ᴏᴛᴩ ɪs `12345`, **ᴩʟᴇᴀsᴇ sᴇɴᴅ ɪᴛ ᴀs** `1 2 3 4 5`.", filters=filters.text, timeout=600)
+            phone_code_msg = await bot.ask(user_id, "» تم ارسال الرمز الى حسابك التيليجرام تأكد منه وارسلها الى هنا.\n `12345`, **ارسل الرمز متفرقه** `1 2 3 4 5`.", filters=filters.text, timeout=600)
             if await cancelled(phone_code_msg):
                 return
     except TimeoutError:
@@ -158,7 +158,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
         string_session = client.session.save()
     else:
         string_session = await client.export_session_string()
-    text = f"**ᴛʜɪs ɪs ʏᴏᴜʀ {ty} sᴛʀɪɴɢ sᴇssɪᴏɴ** \n\n`{string_session}` \n\n**ɢᴇɴᴇʀᴀᴛᴇᴅ ʙʏ :** @StringFatherBot\n🍒 **ɴᴏᴛᴇ :** ᴅᴏɴ'ᴛ sʜᴀʀᴇ ɪᴛ ᴡɪᴛʜ ʏᴏᴜʀ ɢɪʀʟғʀɪᴇɴᴅ 🍑 ᴀɴᴅ ᴅᴏɴ'ᴛ ғᴏʀɢᴇᴛ ᴛᴏ ᴊᴏɪɴ @DevilsHeavenMF 🥺"
+    text = f"**ᴛʜɪs ɪs ʏᴏᴜʀ {ty} sᴛʀɪɴɢ sᴇssɪᴏɴ** \n\n`{string_session}` \n\n**ɢᴇɴᴇʀᴀᴛᴇᴅ ʙʏ :** @aaaalqp\n **ɴᴏᴛᴇ :** ᴅᴏɴ'ᴛ sʜᴀʀᴇ ɪᴛ ᴡɪᴛʜ ʏᴏᴜʀ ɢɪʀʟғʀɪᴇɴᴅ  ᴀɴᴅ ᴅᴏɴ'ᴛ ғᴏʀɢᴇᴛ ᴛᴏ ᴊᴏɪɴ @H_M_Dr"
     try:
         if not is_bot:
             await client.send_message("me", text)
@@ -167,7 +167,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, is_bot: bo
     except KeyError:
         pass
     await client.disconnect()
-    await bot.send_message(msg.chat.id, "» sᴜᴄᴄᴇssғᴜʟʟʏ ɢᴇɴᴇʀᴀᴛᴇᴅ ʏᴏᴜʀ {} sᴛʀɪɴɢ sᴇssɪᴏɴ.\n\nᴩʟᴇᴀsᴇ ᴄʜᴇᴄᴋ ʏᴏᴜʀ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇs ᴛᴏ ɢᴇᴛ ɪᴛ ! \n\n**ᴀ sᴛʀɪɴɢ ɢᴇɴᴇʀᴀᴛᴏʀ ʙᴏᴛ ʙʏ** @DevilsHeavenMF 🥺".format("ᴛᴇʟᴇᴛʜᴏɴ" if telethon else "ᴩʏʀᴏɢʀᴀᴍ"))
+    await bot.send_message(msg.chat.id, "» sᴜᴄᴄᴇssғᴜʟʟʏ ɢᴇɴᴇʀᴀᴛᴇᴅ ʏᴏᴜʀ {} sᴛʀɪɴɢ sᴇssɪᴏɴ.\n\nᴩʟᴇᴀsᴇ ᴄʜᴇᴄᴋ ʏᴏᴜʀ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇs ᴛᴏ ɢᴇᴛ ɪᴛ ! \n\n**ᴀ sᴛʀɪɴɢ ɢᴇɴᴇʀᴀᴛᴏʀ ʙᴏᴛ ʙʏ** @aaaalqp ".format("ᴛᴇʟᴇᴛʜᴏɴ" if telethon else "ᴩʏʀᴏɢʀᴀᴍ"))
 
 
 async def cancelled(msg):
